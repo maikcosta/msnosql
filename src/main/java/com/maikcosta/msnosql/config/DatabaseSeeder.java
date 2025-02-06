@@ -2,6 +2,7 @@ package com.maikcosta.msnosql.config;
 
 import com.maikcosta.msnosql.domain.Post;
 import com.maikcosta.msnosql.domain.User;
+import com.maikcosta.msnosql.dto.AuthorDTO;
 import com.maikcosta.msnosql.repository.PostRepository;
 import com.maikcosta.msnosql.repository.UserRepository;
 import org.springframework.boot.CommandLineRunner;
@@ -32,8 +33,8 @@ public class DatabaseSeeder {
         simpleDateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
         return args -> {
             if (postRepository.count() == 0) {
-                Post p1 = new Post(null,simpleDateFormat.parse("02/02/2025"),"Título Teste","Mensagem teste", new User(null, "Ricardo", "ricardo@test.com"));
-                Post p2 = new Post(null,simpleDateFormat.parse("03/02/2025"),"Título Teste 1","Mensagem teste 1",new User(null, "Ana", "ana@test.com"));
+                Post p1 = new Post(null,simpleDateFormat.parse("02/02/2025"),"Título Teste","Mensagem teste", new AuthorDTO(new User(null,"João","joao@email.com")));
+                Post p2 = new Post(null,simpleDateFormat.parse("03/02/2025"),"Título Teste 1","Mensagem teste 1",new AuthorDTO(new User(null,"Maria","maria@email.com")));
                 postRepository.saveAll(Arrays.asList(p1, p2));
                 System.out.println("Post inseridos no banco!");
             }
