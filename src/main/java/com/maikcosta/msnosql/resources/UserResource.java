@@ -1,5 +1,6 @@
 package com.maikcosta.msnosql.resources;
 
+import com.maikcosta.msnosql.domain.Post;
 import com.maikcosta.msnosql.domain.User;
 import com.maikcosta.msnosql.dto.UserDTO;
 import com.maikcosta.msnosql.services.UserService;
@@ -67,5 +68,9 @@ public class UserResource {
         user = userService.update(user);
         return ResponseEntity.noContent().build();
     }
-
+    @GetMapping(path = "/{id}/posts")
+    public ResponseEntity<List<Post>> findPosts(@PathVariable String id){
+        User user = userService.findById(id);
+        return ResponseEntity.ok().body(user.getPosts());
+    }
 }
