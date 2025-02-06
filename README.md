@@ -10,3 +10,9 @@ Spring-Boot
 ## Gerenciador de dependencias
 Maven
 
+
+## Carga Inical
+@Bean
+
+
+## Query Methods (Spring Data MongoDB)

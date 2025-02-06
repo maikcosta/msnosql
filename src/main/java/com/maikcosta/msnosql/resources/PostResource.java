@@ -1,6 +1,7 @@
 package com.maikcosta.msnosql.resources;
 
 import com.maikcosta.msnosql.domain.Post;
+import com.maikcosta.msnosql.resources.util.URL;
 import com.maikcosta.msnosql.services.PostService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -39,4 +41,11 @@ public class PostResource {
         Post post = postService.findById(id);
         return ResponseEntity.ok().body(post);
     }
+    @GetMapping(path = "/titlesearch")
+    public ResponseEntity<List<Post>> findByTitle(@RequestParam(value = "text", defaultValue = "")String text){
+        text = URL.decodeParam(text);
+        List<Post> posts = postService.findByTitle(text);
+        return ResponseEntity.ok().body(posts);
+    }
+
 }
