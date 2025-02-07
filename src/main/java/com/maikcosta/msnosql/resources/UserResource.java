@@ -4,6 +4,7 @@ import com.maikcosta.msnosql.domain.Post;
 import com.maikcosta.msnosql.domain.User;
 import com.maikcosta.msnosql.dto.UserDTO;
 import com.maikcosta.msnosql.services.UserService;
+import io.swagger.v3.oas.annotations.Operation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +33,7 @@ public class UserResource {
 
     private static final Logger logger = LoggerFactory.getLogger(UserService.class);
 
-
+    @Operation(summary = "Retorna todos os usuários",description = "Metodo que retorna todos os usuários",tags = "User")
     @GetMapping
     public ResponseEntity<List<UserDTO>> findAll(){
         List<User> users = userService.findAll();
@@ -40,13 +41,13 @@ public class UserResource {
         logger.debug("Usuários encontrados: " + users);
         return ResponseEntity.ok().body(usersDTO);
     }
-
+    @Operation(summary = "Busca usuário por ID",description = "Metodo que retorna usuário por ID",tags = "User")
     @GetMapping(path = "/{id}")
     public ResponseEntity<UserDTO> findById(@PathVariable String id){
         User user = userService.findById(id);
         return ResponseEntity.ok().body(new UserDTO(user));
     }
-
+    @Operation(summary = "Inserir usuário",description = "Metodo para inserir usuários",tags = "User")
     @PostMapping
     public ResponseEntity<Void> insert(@RequestBody UserDTO userDTO){
         User user = userService.fromDTO(userDTO);
@@ -54,13 +55,13 @@ public class UserResource {
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(userDTO.getId()).toUri();
         return ResponseEntity.created(uri).build();
     }
-
+    @Operation(summary = "Deleta usuário",description = "Metodo para deletar usuários",tags = "User")
     @DeleteMapping(path = "/{id}")
     public ResponseEntity<UserDTO> delete(@PathVariable String id){
         userService.delete(id);
         return ResponseEntity.noContent().build();
     }
-
+    @Operation(summary = "Atualizar usuário",description = "Metodo para atualizar usuários",tags = "User")
     @PutMapping(path = "/{id}")
     public ResponseEntity<Void> update(@RequestBody UserDTO userDTO, @PathVariable String id){
         User user = userService.fromDTO(userDTO);
@@ -68,6 +69,7 @@ public class UserResource {
         user = userService.update(user);
         return ResponseEntity.noContent().build();
     }
+    @Operation(summary = "Buscar post por usuário",description = "Metodo busca posts por usuários",tags = "User")
     @GetMapping(path = "/{id}/posts")
     public ResponseEntity<List<Post>> findPosts(@PathVariable String id){
         User user = userService.findById(id);
