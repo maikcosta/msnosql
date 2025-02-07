@@ -11,10 +11,11 @@ Mongo DB
 Docker Desktop
 
 ## Frameworks
-Spring-Boot-Data-MongoDB
-Spring-Boot-Starter-Web
-Spring-Boot-Starter-Test
-Lombok
+
+- Spring-Boot-Data-MongoDB
+- Spring-Boot-Starter-Web
+- Spring-Boot-Starter-Test
+- Lombok
 
 
 ## Gerenciador de dependências
@@ -32,3 +33,33 @@ Para acessar:
 ```
 http://localhost:8080/swagger-ui/index.html
 ```
+
+## Boas praticas
+- Commits semanticos
+- Git Flow
+
+
+## Etapas para executar o projeto
+
+Serão informados os passos para a execução projeto.
+
+
+### Premissas
+- Java 17 instalado e devidamente configurado
+- IDE para abrir o projeto(Eu usei Intellij)
+- Docker Desktop
+- MongoDBCompass
+
+### Passo a passo
+- Download do projeto msnosql
+```
+git clone https://github.com/maikcosta/msnosql.git
+```
+- Download imagem mongodb no docker hub através do Docker Desktop
+![img.png](img.png)
+- Executar o mongodb
+![img_1.png](img_1.png)
+- Criar conexão com o banco mongodb
+![img_2.png](img_2.png)
+- Criar database msnosql
+![img_3.png](img_3.png)
